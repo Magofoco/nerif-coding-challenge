@@ -2,6 +2,8 @@ import React from "react";
 import { Box, Flex } from "@chakra-ui/react";
 import Web3ConnectButton from "../../containers/Web3Connect";
 import { useWeb3ModalAccount } from "@web3modal/ethers/react";
+import { getTruncatedAddress } from "../../utils/getTruncatedAddress";
+import logoSVG from "../../assets/logo.svg"; // Import the SVG file directly
 
 const Navbar: React.FC = () => {
   const { address, isConnected } = useWeb3ModalAccount();
@@ -10,17 +12,19 @@ const Navbar: React.FC = () => {
     <Flex as="nav" align="center" justify="space-between" padding="1rem">
       {/* Left side: Logo */}
       <Box>
-        <img src={"logo"} alt="Logo" height="30px" />
+        <img src={logoSVG} alt="Logo" height="30px" />
       </Box>
 
-      <Box>
-        {isConnected && address && (
-          <Box display="inline" marginRight="1rem">
-            {address}
-          </Box>
-        )}
-        <Web3ConnectButton />
-      </Box>
+      <Flex alignItems="center">
+        <Box>
+          {isConnected && address && (
+            <Box display="inline" marginRight="1rem">
+              {getTruncatedAddress(address)}
+            </Box>
+          )}
+          <Web3ConnectButton />
+        </Box>
+      </Flex>
     </Flex>
   );
 };

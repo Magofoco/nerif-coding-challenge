@@ -1,47 +1,68 @@
 import DeployerComponent from "../../components/DeployerComponent";
 import { GATEWAY_FACTORY_CONTRACT_ADDRESS } from "../../blockchain/contractAddresses";
-import { useWeb3ModalAccount } from "@web3modal/ethers/react";
+import GATEWAY_FACTORY_CONTRACT_ABI from "../../blockchain/contracts/GatewayFactoryABI.json";
+import {
+  useWeb3ModalAccount,
+  useWeb3ModalProvider,
+} from "@web3modal/ethers/react";
 import Web3ConnectButton from "../Web3Connect";
-import { GatewayFactoryABI__factory } from "../../types/ethers";
-import { ethers } from "ethers";
+import { BrowserProvider, ethers } from "ethers";
 import { useState } from "react";
-
-const { REACT_APP_INFURA_API_KEY } = process.env;
+import { GatewayFactoryABI__factory } from "../../types/ethers";
 
 const DeployerContainer = () => {
-  const [error, setError] = useState<undefined | string>(undefined);
+  const { address, isConnected } = useWeb3ModalAccount();
+  const { walletProvider } = useWeb3ModalProvider();
+  const iface = new ethers.Interface(GATEWAY_FACTORY_CONTRACT_ABI);
 
-  const provider = new ethers.InfuraProvider(
-    "matic-mumbai",
-    REACT_APP_INFURA_API_KEY
-  );
+  const [error, setError] = useState<string | undefined>(undefined);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [deployedContractAddress, setDeployedContractAddress] = useState<
+    string | undefined
+  >(undefined);
 
-  const { address } = useWeb3ModalAccount();
-
-  const gatewayFactoryContract = GatewayFactoryABI__factory.connect(
-    GATEWAY_FACTORY_CONTRACT_ADDRESS,
-    provider
-  );
-
-  console.log(REACT_APP_INFURA_API_KEY);
-
-  if (!address) {
+  if (!isConnected || !address || !walletProvider) {
     return <Web3ConnectButton />;
   }
 
   const handleClickDeployButton = async () => {
+    setIsLoading(true);
+    setError(undefined);
+
     try {
-      const tx = await gatewayFactoryContract.deployGateway(address);
-      await tx.wait();
+      const ethersProvider = new BrowserProvider(walletProvider);
+      const signer = await ethersProvider.getSigner();
+
+      const gatewayContract = GatewayFactoryABI__factory.connect(
+        GATEWAY_FACTORY_CONTRACT_ADDRESS,
+        signer
+      );
+
+      const deployTx = await gatewayContract.deployGateway(address);
+
+      const receipt = await deployTx.wait();
+
+      const deployedEventLog = receipt?.logs
+        .map((log) => iface.parseLog(log))
+        .find((parsedLog) => parsedLog?.name === "GatewayDeployed");
+
+      const deployedAddress = deployedEventLog
+        ? deployedEventLog.args.gatewayAddr
+        : undefined;
+
+      setDeployedContractAddress(deployedAddress);
     } catch (e) {
-      // TODO: Handle the error gracefully
-      console.log("e", e);
+      console.log("Error:", e);
       setError("Something went wrong");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
     <DeployerComponent
+      deployedContractAddress={deployedContractAddress}
+      isLoading={isLoading}
       error={error}
       onClickDeployButton={handleClickDeployButton}
     />
