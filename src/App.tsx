@@ -4,8 +4,10 @@ import {
   defaultConfig,
   useWeb3ModalAccount,
 } from "@web3modal/ethers/react";
-import { Button, ChakraProvider, theme } from "@chakra-ui/react";
-import Web3ConnectButton from "./containers/Web3ConnetButton";
+import { ChakraProvider } from "@chakra-ui/react";
+import Pages from "./containers/Pages";
+import Navbar from "./components/Navbar";
+import theme from "./theme";
 
 const { REACT_APP_WALLET_CONNECT_PROJECT_ID } = process.env;
 
@@ -41,9 +43,8 @@ const App = () => {
 
   return (
     <ChakraProvider theme={theme}>
-      <Web3ConnectButton />
-      console.log
-      <Button backgroundColor="teal.500">fsfs</Button>
+      <Navbar />
+      <Pages />
     </ChakraProvider>
   );
 };
