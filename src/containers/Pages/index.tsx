@@ -5,7 +5,7 @@ const Pages = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Homepage />}></Route>
+        <Route path="/" element={<Homepage />} />
       </Routes>
     </BrowserRouter>
   );

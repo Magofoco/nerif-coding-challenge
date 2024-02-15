@@ -7,14 +7,7 @@ const Navbar: React.FC = () => {
   const { address, isConnected } = useWeb3ModalAccount();
 
   return (
-    <Flex
-      as="nav"
-      align="center"
-      justify="space-between"
-      padding="1rem"
-      bg="#E8F5FE"
-      color="white"
-    >
+    <Flex as="nav" align="center" justify="space-between" padding="1rem">
       {/* Left side: Logo */}
       <Box>
         <img src={"logo"} alt="Logo" height="30px" />

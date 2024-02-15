@@ -4,10 +4,10 @@ import {
   defaultConfig,
   useWeb3ModalAccount,
 } from "@web3modal/ethers/react";
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, theme } from "@chakra-ui/react";
 import Pages from "./containers/Pages";
 import Navbar from "./components/Navbar";
-import theme from "./theme";
+import Web3ConnectButton from "./containers/Web3Connect";
 
 const { REACT_APP_WALLET_CONNECT_PROJECT_ID } = process.env;
 
@@ -15,24 +15,24 @@ const projectId = REACT_APP_WALLET_CONNECT_PROJECT_ID || "";
 
 console.log("projectId", projectId);
 
-const mainnet = {
-  chainId: 1,
-  name: "Ethereum",
-  currency: "ETH",
-  explorerUrl: "https://etherscan.io",
-  rpcUrl: "https://cloudflare-eth.com",
+const mumbaiNetwork = {
+  chainId: 80001,
+  name: "Polygon Mumbai Testnet",
+  currency: "MATIC",
+  explorerUrl: "https://mumbai.polygonscan.com/",
+  rpcUrl: "https://rpc-mumbai.maticvigil.com/",
 };
 
 const metadata = {
-  name: "My Website",
-  description: "My Website description",
-  url: "https://mywebsite.com", // origin must match your domain & subdomain
+  name: "NERIF Network",
+  description: "Decentralized Cross-Chain Smart Contract Automation Platform",
+  url: "https://nerif.network/",
   icons: ["https://avatars.mywebsite.com/"],
 };
 
 createWeb3Modal({
   ethersConfig: defaultConfig({ metadata }),
-  chains: [mainnet],
+  chains: [mumbaiNetwork],
   projectId,
   enableAnalytics: true,
 });
