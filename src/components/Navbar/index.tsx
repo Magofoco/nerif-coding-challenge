@@ -3,15 +3,16 @@ import { Box, Flex } from "@chakra-ui/react";
 import Web3ConnectButton from "../../containers/Web3Connect";
 import { useWeb3ModalAccount } from "@web3modal/ethers/react";
 import { getTruncatedAddress } from "../../utils/getTruncatedAddress";
-import logoSVG from "../../assets/logo.svg"; // Import the SVG file directly
+import logoSVG from "../../assets/logo.svg";
+import { useNavigate } from "react-router-dom";
 
 const Navbar: React.FC = () => {
   const { address, isConnected } = useWeb3ModalAccount();
+  const navigate = useNavigate();
 
   return (
     <Flex as="nav" align="center" justify="space-between" padding="1rem">
-      {/* Left side: Logo */}
-      <Box>
+      <Box _hover={{ cursor: "pointer" }} onClick={() => navigate("/")}>
         <img src={logoSVG} alt="Logo" height="30px" />
       </Box>
 

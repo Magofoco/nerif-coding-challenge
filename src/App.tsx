@@ -3,6 +3,7 @@ import { createWeb3Modal, defaultConfig } from "@web3modal/ethers/react";
 import { ChakraProvider, theme } from "@chakra-ui/react";
 import Pages from "./containers/Pages";
 import Navbar from "./components/Navbar";
+import { BrowserRouter } from "react-router-dom";
 
 const { REACT_APP_WALLET_CONNECT_PROJECT_ID } = process.env;
 
@@ -33,8 +34,10 @@ createWeb3Modal({
 const App = () => {
   return (
     <ChakraProvider theme={theme}>
-      <Navbar />
-      <Pages />
+      <BrowserRouter>
+        <Navbar />
+        <Pages />
+      </BrowserRouter>
     </ChakraProvider>
   );
 };
