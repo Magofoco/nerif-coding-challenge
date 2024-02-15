@@ -1,5 +1,17 @@
+import { Box } from "@chakra-ui/react";
+import DeployerContainer from "../DeployerContainer";
+
 const Homepage = () => {
-  return <h1>dasdas</h1>;
+  return (
+    <Box
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      height="90vh"
+    >
+      <DeployerContainer />
+    </Box>
+  );
 };
 
 export default Homepage;

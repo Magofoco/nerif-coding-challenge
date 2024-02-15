@@ -29,7 +29,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "typechain": "npx typechain --target=ethers-v6 --out-dir=types/ethers ./src/blockchain/contracts/*.json  "
+    "typechain": "npx typechain --target=ethers-v6 --out-dir=./src/types/ethers ./src/blockchain/contracts/*.json  "
   },
   "eslintConfig": {
     "extends": [
