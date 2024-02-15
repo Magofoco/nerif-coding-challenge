@@ -11,7 +11,10 @@ const Web3ConnectButton = () => {
   const { disconnect } = useDisconnect();
 
   return (
-    <Button onClick={() => (isConnected ? disconnect() : open())}>
+    <Button
+      variant={isConnected ? "default" : "wallet"}
+      onClick={() => (isConnected ? disconnect() : open())}
+    >
       {isConnected ? "Disconnect" : "Connect"}
     </Button>
   );

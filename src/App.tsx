@@ -4,6 +4,7 @@ import { ChakraProvider, theme } from "@chakra-ui/react";
 import Pages from "./containers/Pages";
 import Navbar from "./components/Navbar";
 import { BrowserRouter } from "react-router-dom";
+import customTheme from "./customTheme";
 
 const { REACT_APP_WALLET_CONNECT_PROJECT_ID } = process.env;
 
@@ -33,7 +34,7 @@ createWeb3Modal({
 
 const App = () => {
   return (
-    <ChakraProvider theme={theme}>
+    <ChakraProvider theme={customTheme}>
       <BrowserRouter>
         <Navbar />
         <Pages />
