@@ -1,4 +1,4 @@
-import { Alert, AlertIcon, Box, Button, Spinner } from "@chakra-ui/react";
+import { Alert, AlertIcon, Box, Button, Spinner, Text } from "@chakra-ui/react";
 
 interface DeployerComponentProps {
   deployedContractAddress: string | undefined;
@@ -15,7 +15,9 @@ const DeployerComponent: React.FC<DeployerComponentProps> = ({
 }) => {
   return (
     <Box>
-      {deployedContractAddress}
+      {deployedContractAddress && (
+        <Text mb={4}>Deployed Contract Address: {deployedContractAddress}</Text>
+      )}
       <Button onClick={onClickDeployButton} disabled={isLoading}>
         {isLoading ? (
           <>
@@ -27,7 +29,7 @@ const DeployerComponent: React.FC<DeployerComponentProps> = ({
         )}
       </Button>
       {error && (
-        <Alert status="error" mt={8}>
+        <Alert status="error" mt={4}>
           <AlertIcon />
           {error}
         </Alert>

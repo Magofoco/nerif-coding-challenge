@@ -7,7 +7,7 @@ import {
 } from "@web3modal/ethers/react";
 import Web3ConnectButton from "../Web3Connect";
 import { BrowserProvider, ethers } from "ethers";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { GatewayFactoryABI__factory } from "../../types/ethers";
 
 const DeployerContainer = () => {
@@ -20,6 +20,13 @@ const DeployerContainer = () => {
   const [deployedContractAddress, setDeployedContractAddress] = useState<
     string | undefined
   >(undefined);
+
+  useEffect(() => {
+    const storedAddress = localStorage.getItem("deployedGatewayAddress");
+    if (storedAddress) {
+      setDeployedContractAddress(storedAddress);
+    }
+  }, []);
 
   if (!isConnected || !address || !walletProvider) {
     return <Web3ConnectButton />;
@@ -51,6 +58,9 @@ const DeployerContainer = () => {
         : undefined;
 
       setDeployedContractAddress(deployedAddress);
+      if (deployedAddress) {
+        localStorage.setItem("deployedGatewayAddress", deployedAddress);
+      }
     } catch (e) {
       console.log("Error:", e);
       setError("Something went wrong");
