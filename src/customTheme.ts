@@ -2,11 +2,11 @@ import { extendTheme } from "@chakra-ui/react";
 
 const bgAnimationKeyframes = `
   @keyframes bgAnimation {
-    0% { background-color: #ff0000; }
-    25% { background-color: #00ff00; }
-    50% { background-color: #0000ff; }
-    75% { background-color: #ffff00; }
-    100% { background-color: #ff00ff; }
+    0% { background-color: rgba(255, 0, 0, 0.7); } 
+    25% { background-color: rgba(0, 255, 0, 0.7); } 
+    50% { background-color: rgba(0, 0, 255, 0.7); } 
+    75% { background-color: rgba(204, 204, 0, 0.7); }
+    100% { background-color: rgba(255, 0, 255, 0.7); }
   }
 `;
 
@@ -26,7 +26,7 @@ const customTheme = extendTheme({
     Button: {
       variants: {
         wallet: {
-          animation: "bgAnimation 4s infinite",
+          animation: "bgAnimation 5s infinite",
           color: "white",
           borderRadius: "12px",
         },
@@ -36,6 +36,12 @@ const customTheme = extendTheme({
           color: "#FFFFFF",
           borderRadius: "12px",
           _hover: { bg: "#3337A1" },
+          _disabled: {
+            _hover: {
+              backgroundColor: "#4B53Fe !important",
+              color: "#FFFFFF !important",
+            },
+          },
         },
       },
       defaultProps: {

@@ -1,46 +1,32 @@
-# Getting Started with Create React App
+# Your React App README
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Welcome to your React App! This application integrates with Metamask and utilizes the Polygon Mumbai Testnet to deploy Gateway contracts. Follow the steps below to get started.
 
-## Available Scripts
+## Prerequisites
 
-In the project directory, you can run:
+Before you begin, ensure you have the following requirements met:
 
-### `npm start`
+- **Node.js**: Version 18 or higher. You can check your Node version by running `node -v` in your terminal.
+- **Environment Variables**: Create a `.env` file at the root of your project directory. Add the following line to it:
+`REACT_APP_WALLET_CONNECT_PROJECT_ID=your_wallet_connect_key
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Replace `your_wallet_connect_key` with your Wallet Connect project ID, which can be generated at [Wallet Connect Cloud](https://cloud.walletconnect.com/app). Navigate to the Dashboard, select `projects`, then `create`, and copy the `projectId` into your `.env` file.
+- **Metamask Extension**: Ensure Metamask is installed in your browser. This is crucial for connecting your wallet to the app.
+- **Network Connection**: Your Metamask should be connected to the `Polygon Mumbai Testnet`.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## How to Start the App
 
-### `npm test`
+1. Install dependencies by running:
+`npm install`
+2. Start the application with:
+`npm run start`
+3. Open your browser and visit [http://localhost:3000/](http://localhost:3000/) to view the app.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## How to Use the App
 
-### `npm run build`
+1. At the home page (`http://localhost:3000/`), click the `Connect` button to link your Metamask wallet to the app. Ensure your Metamask is connected to the `Polygon Mumbai Testnet`.
+2. To deploy a new Gateway contract, click on `Deploy new gateway`. Accept the signature requests from Metamask when prompted.
+3. The address of the newly deployed gateway contract will be displayed on the screen.
+4. You can deploy additional Gateway contracts by clicking on `Deploy new gateway` again.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Enjoy using the app to deploy Gateway contracts on the Polygon Mumbai Testnet. If you encounter any issues, please refer to the troubleshooting section below or contact support.

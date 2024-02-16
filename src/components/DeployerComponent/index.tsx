@@ -1,4 +1,4 @@
-import { Alert, AlertIcon, Box, Button, Text } from "@chakra-ui/react";
+import { Alert, AlertIcon, Box, Button, Text, Flex } from "@chakra-ui/react"; // Import Flex
 
 interface DeployerComponentProps {
   deployedContractAddress: string | undefined;
@@ -15,17 +15,25 @@ const DeployerComponent: React.FC<DeployerComponentProps> = ({
 }) => {
   return (
     <Box>
-      {deployedContractAddress && (
-        <Text mb={4}>Deployed Contract Address: {deployedContractAddress}</Text>
-      )}
-      <Button
-        onClick={onClickDeployButton}
-        disabled={isLoading}
-        isLoading={isLoading}
-        variant="default"
-      >
-        {isLoading ? <>Deploying...</> : "Deploy new gateway"}
-      </Button>
+      <Flex alignItems="center" mb={4} justifyContent="space-between">
+        <Flex alignItems="center" flex="1">
+          {deployedContractAddress && (
+            <>
+              <Text mr={2}>Deployed Contract Address:</Text>
+              <Text fontWeight="bold">{deployedContractAddress}</Text>
+            </>
+          )}
+        </Flex>
+        <Button
+          onClick={onClickDeployButton}
+          disabled={isLoading}
+          isLoading={isLoading}
+          variant="default"
+          ml={deployedContractAddress ? 4 : 0}
+        >
+          {isLoading ? <>Deploying...</> : "Deploy new gateway"}
+        </Button>
+      </Flex>
       {error && (
         <Alert status="error" mt={4}>
           <AlertIcon />
